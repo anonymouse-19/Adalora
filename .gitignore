@@ -50,3 +50,9 @@ htmlcov/
 outputs/
 *.log
 .wandb/
+
+# Documentation files
+COST_FREE_GUARANTEE.md
+ZERO_COST_REPORT.md
+NLP_AdaLoRA-Bench.pdf
+NLP_AdaLoRA-Bench.txt
