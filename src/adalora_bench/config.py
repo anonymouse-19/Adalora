@@ -49,6 +49,10 @@ class ExperimentConfig:
     lora_r: int = 8
     lora_alpha: int = 16
     lora_dropout: float = 0.05
+    adalora_init_r: int = 12
+    adalora_target_r: int = 8
+    adalora_alpha: int = 16
+    adalora_dropout: float = 0.05
     target_modules: list[str] = field(default_factory=lambda: ["q_proj", "v_proj", "query", "value"])
     training: TrainingConfig = field(default_factory=TrainingConfig)
     tars: TarsConfig = field(default_factory=TarsConfig)

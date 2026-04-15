@@ -75,11 +75,12 @@ class LoRAMethod(PEFTMethod):
 class AdaLoRAMethod(PEFTMethod):
     name = "adalora"
 
-    def __init__(self, init_r: int = 12, target_r: int = 8, alpha: int = 16, dropout: float = 0.05):
+    def __init__(self, init_r: int = 12, target_r: int = 8, alpha: int = 16, dropout: float = 0.05, total_step: int = 375):
         self.init_r = init_r
         self.target_r = target_r
         self.alpha = alpha
         self.dropout = dropout
+        self.total_step = total_step
 
     def apply(self, model: Any, **kwargs) -> Any:
         task_type = _task_type(kwargs["task_type"])
@@ -92,6 +93,7 @@ class AdaLoRAMethod(PEFTMethod):
             lora_dropout=self.dropout,
             target_modules=target_modules,
             bias="none",
+            total_step=self.total_step,
         )
         return get_peft_model(model, config)
 

@@ -51,12 +51,25 @@ def main() -> None:
 
     model, tokenizer = build_model_and_tokenizer(cfg.model_name, task_spec.task_type, num_labels=num_labels)
 
+    # Calculate total training steps for AdaLoRA
+    total_train_samples = len(train_split)
+    steps_per_epoch = (total_train_samples + cfg.training.per_device_train_batch_size - 1) // cfg.training.per_device_train_batch_size
+    total_steps = steps_per_epoch * cfg.training.num_train_epochs
+
     method_kwargs = {}
-    if cfg.method_name in {"lora", "adalora"}:
+    if cfg.method_name == "lora":
         method_kwargs = {
             "r": cfg.lora_r,
             "alpha": cfg.lora_alpha,
             "dropout": cfg.lora_dropout,
+        }
+    elif cfg.method_name == "adalora":
+        method_kwargs = {
+            "init_r": getattr(cfg, "adalora_init_r", 12),
+            "target_r": getattr(cfg, "adalora_target_r", 8),
+            "alpha": getattr(cfg, "adalora_alpha", 16),
+            "dropout": getattr(cfg, "adalora_dropout", 0.05),
+            "total_step": total_steps,
         }
     method = build_peft_method(cfg.method_name, **method_kwargs)
 

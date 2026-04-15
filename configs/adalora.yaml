@@ -8,9 +8,10 @@ max_seq_length: 128
 generation_max_length: 128
 report_to:
   - none
-lora_r: 8
-lora_alpha: 16
-lora_dropout: 0.05
+adalora_init_r: 12
+adalora_target_r: 8
+adalora_alpha: 16
+adalora_dropout: 0.05
 target_modules:
   - query
   - value
