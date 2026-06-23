@@ -1,4 +1,4 @@
-# AdaLoRA-Bench (Generated Scaffold)
+# AdaLoRA-Bench
 
 This repository contains a runnable implementation scaffold for the project described in the paper **"AdaLoRA-Bench: A Unified Benchmarking Framework for Parameter-Efficient Fine-Tuning Methods on Heterogeneous NLP Tasks"**.
 
